@@ -30,8 +30,13 @@ RUN cd $HOME \
     && mv $HOME/wildfly-$WILDFLY_VERSION $JBOSS_HOME \
     && rm wildfly-$WILDFLY_VERSION.tar.gz
 
+# Set some parameters
+ENV DEBUG=false HEAP=512m 
+
+COPY standalone.conf $JBOSS_HOME/bin/
+
 # Expose the ports we're interested in
-EXPOSE 8080
+EXPOSE 8080 8787
 
 # Set the default command to run on boot
 # This will boot WildFly in the standalone mode and bind to all interface
